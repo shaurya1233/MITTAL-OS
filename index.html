@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0c10">
+    <meta name="description" content="MITTAL OS — The Ultimate Web + System Operating Environment">
+    <title>MITTAL OS</title>
+    
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+    
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/desktop.css">
+    <link rel="stylesheet" href="css/windows.css">
+    <link rel="stylesheet" href="css/taskbar.css">
+    <link rel="stylesheet" href="css/start-menu.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body id="mittal-root" class="no-select">
+
+    <!-- Boot Sequence Overlay -->
+    <div id="boot-screen" class="boot-overlay">
+        <div class="boot-content">
+            <div class="boot-logo">
+                <div class="logo-orb"></div>
+                <h1 class="logo-title">MITTAL <span>OS</span></h1>
+            </div>
+            <div class="boot-spinner"></div>
+            <div id="boot-status" class="boot-status-text">Initializing system kernel...</div>
+            <button id="skip-boot-btn" class="boot-skip-btn">Skip Intro</button>
+        </div>
+    </div>
+
+    <!-- Lock & Login Screen -->
+    <div id="lock-screen" class="lock-overlay hidden">
+        <div class="lock-clock-container">
+            <div id="lock-time" class="lock-time">00:00</div>
+            <div id="lock-date" class="lock-date">Monday, January 1</div>
+        </div>
+        
+        <div id="login-container" class="login-card">
+            <div class="user-avatar-wrapper">
+                <img id="login-avatar" src="assets/shauryajpg.jpg" alt="User Profile" class="user-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'35\' r=\'25\' fill=\'%233b82f6\'/><circle cx=\'50\' cy=\'100\' r=\'45\' fill=\'%233b82f6\'/></svg>'">
+            </div>
+            <h2 id="login-username" class="login-username">Shaurya</h2>
+            
+            <form id="login-form" class="login-form" onsubmit="return false;">
+                <div id="password-field-group" class="input-group">
+                    <input type="password" id="login-password" placeholder="Enter Password" autocomplete="current-password">
+                    <button type="submit" id="login-submit-btn" aria-label="Sign In">→</button>
+                </div>
+                <div id="login-error" class="login-error-msg"></div>
+            </form>
+
+            <div class="user-switch-bar">
+                <button class="user-switch-btn active" data-user-id="shaurya">Shaurya</button>
+                <button class="user-switch-btn" data-user-id="public">Public Guest</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Desktop Workspace -->
+    <main id="desktop-viewport" class="desktop-viewport">
+        <!-- Desktop Wallpaper Layer -->
+        <div id="desktop-wallpaper" class="desktop-wallpaper"></div>
+        
+        <!-- Desktop Grid Icons -->
+        <div id="desktop-grid" class="desktop-grid"></div>
+
+        <!-- Dynamic Window Container -->
+        <section id="window-container" class="window-container" aria-label="Active Windows"></section>
+
+        <!-- Widgets Sidebar Panel -->
+        <aside id="widgets-panel" class="widgets-panel hidden">
+            <div class="widgets-header">
+                <h2>System Dashboard</h2>
+                <button id="close-widgets-btn" class="icon-btn">✕</button>
+            </div>
+            <div id="widgets-content" class="widgets-content">
+                <!-- Weather, System Status, Quick Notes loaded via JS -->
+            </div>
+        </aside>
+
+        <!-- Notification Center & Quick Settings -->
+        <aside id="quick-settings-panel" class="quick-settings-panel hidden">
+            <div class="quick-toggles-grid">
+                <button class="toggle-card active" id="toggle-wifi">
+                    <span class="icon">📶</span>
+                    <span class="label">Wi-Fi</span>
+                    <span id="wifi-status-val" class="sub-label">Connected</span>
+                </button>
+                <button class="toggle-card active" id="toggle-bluetooth">
+                    <span class="icon">󰂯</span>
+                    <span class="label">Bluetooth</span>
+                    <span id="bt-status-val" class="sub-label">Ready</span>
+                </button>
+                <button class="toggle-card" id="toggle-theme">
+                    <span class="icon">🌙</span>
+                    <span class="label">Dark Mode</span>
+                    <span class="sub-label">On</span>
+                </button>
+                <button class="toggle-card" id="toggle-nightlight">
+                    <span class="icon">👁️</span>
+                    <span class="label">Night Light</span>
+                    <span class="sub-label">Off</span>
+                </button>
+            </div>
+            <div class="slider-group">
+                <div class="slider-row">
+                    <span>🔊</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="80">
+                </div>
+                <div class="slider-row">
+                    <span>☀️</span>
+                    <input type="range" id="brightness-slider" min="20" max="100" value="100">
+                </div>
+            </div>
+            <div class="system-telemetry-card">
+                <div class="telemetry-item">
+                    <span>Battery Status:</span>
+                    <strong id="battery-telemetry-val">Detecting...</strong>
+                </div>
+                <div class="telemetry-item">
+                    <span>Storage Engine:</span>
+                    <strong>IndexedDB Active</strong>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Notification Flyout -->
+        <div id="notification-center" class="notification-center hidden">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button id="clear-notifications-btn">Clear All</button>
+            </div>
+            <div id="notification-list" class="notification-list"></div>
+        </div>
+
+        <!-- Start Menu Dropdown -->
+        <div id="start-menu" class="start-menu hidden">
+            <div class="start-search-bar">
+                <input type="text" id="start-search-input" placeholder="Type here to search apps, files, settings...">
+            </div>
+            <div class="start-section-title">Pinned Applications</div>
+            <div id="start-pinned-grid" class="start-pinned-grid"></div>
+            
+            <div class="start-section-title">Recent Activity</div>
+            <div id="start-recent-list" class="start-recent-list"></div>
+
+            <div class="start-user-footer">
+                <div class="user-profile-badge">
+                    <img id="start-user-avatar" src="assets/shauryajpg.jpg" alt="User" class="avatar-sm">
+                    <span id="start-user-name">Shaurya</span>
+                </div>
+                <div class="power-controls">
+                    <button id="power-lock-btn" title="Lock Device">🔒</button>
+                    <button id="power-logout-btn" title="Sign Out">🚪</button>
+                    <button id="power-restart-btn" title="Restart System">🔄</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Taskbar Container -->
+    <footer id="taskbar" class="taskbar">
+        <div class="taskbar-left">
+            <button id="widgets-toggle-btn" class="taskbar-btn" title="Widgets & Telemetry">
+                <span class="icon">📊</span>
+            </button>
+        </div>
+
+        <div class="taskbar-center" id="taskbar-pinned-apps">
+            <button id="start-menu-btn" class="taskbar-btn start-btn" title="Start Menu">
+                <div class="start-icon-orb"></div>
+            </button>
+            <!-- App launcher items dynamically populated -->
+        </div>
+
+        <div class="taskbar-right">
+            <div id="system-tray" class="system-tray">
+                <span id="tray-wifi-icon" title="Network Status">📶</span>
+                <span id="tray-battery-icon" title="Battery Status">🔋</span>
+                <span id="tray-volume-icon" title="Volume">🔊</span>
+            </div>
+            <button id="system-clock-btn" class="taskbar-btn clock-btn">
+                <div id="taskbar-time">00:00</div>
+                <div id="taskbar-date">01/01/2026</div>
+            </button>
+            <button id="action-center-btn" class="taskbar-btn" title="Quick Settings">
+                <span>💬</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Master ES Module Entry -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
