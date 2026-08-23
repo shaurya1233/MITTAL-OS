@@ -1,0 +1,68 @@
+:root {
+    /* Branding Colors */
+    --brand-primary: #3b82f6;
+    --brand-primary-hover: #60a5fa;
+    --brand-accent: #06b6d4;
+    --brand-gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+    
+    /* Dark Theme Surface System */
+    --bg-base: #090d16;
+    --bg-surface-1: rgba(18, 24, 38, 0.75);
+    --bg-surface-2: rgba(30, 41, 59, 0.85);
+    --bg-glass: rgba(15, 23, 42, 0.65);
+    --bg-glass-solid: #0f172a;
+    
+    /* Text & Typography */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --text-inverse: #0f172a;
+
+    /* Windows & Borders */
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --border-focus: rgba(59, 130, 246, 0.5);
+    --shadow-window: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.2);
+    --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+    /* Glassmorphic Effects */
+    --blur-backdrop: blur(24px) saturate(180%);
+    --blur-subtle: blur(12px);
+
+    /* System Layout Sizes */
+    --taskbar-height: 48px;
+    --window-header-height: 38px;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-full: 9999px;
+
+    /* Animation Timings */
+    --anim-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --anim-normal: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    --anim-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Z-Index Hierarchy */
+    --z-wallpaper: 0;
+    --z-desktop-icons: 10;
+    --z-windows: 100;
+    --z-taskbar: 1000;
+    --z-popups: 2000;
+    --z-lockscreen: 9000;
+    --z-bootscreen: 10000;
+}
+
+.light-theme {
+    --bg-base: #f1f5f9;
+    --bg-surface-1: rgba(255, 255, 255, 0.8);
+    --bg-surface-2: rgba(241, 245, 249, 0.9);
+    --bg-glass: rgba(255, 255, 255, 0.7);
+    --bg-glass-solid: #ffffff;
+
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #94a3b8;
+    --text-inverse: #f8fafc;
+
+    --border-glass: rgba(0, 0, 0, 0.08);
+    --shadow-window: 0 15px 35px rgba(15, 23, 42, 0.12), 0 0 1px rgba(0, 0, 0, 0.1);
+}
