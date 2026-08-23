@@ -1,0 +1,30 @@
+name: MITTAL OS CI/CD Engine
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Toolchain Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nasm gcc-multilib build-essential nodejs
+
+    - name: Compile Native OS Architecture
+      run: |
+        make all
+
+    - name: Validate Web Desktop Engine
+      run: |
+        cd web
+        npx -y http-server -p 8080 &
+        sleep 2
+        curl -I http://localhost:8080
